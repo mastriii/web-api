@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form API Request</title>
+</head>
+<body>
+    <form id="apiForm">
+        <input type="text" id="urlInput" placeholder="Masukkan URL API">
+        <button type="button" id="submitButton">Kirim</button>
+    </form>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="response" style="display: none;"></div>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const apiForm = document.getElementById("apiForm");
+    const urlInput = document.getElementById("urlInput");
+    const submitButton = document.getElementById("submitButton");
+    const loadingDiv = document.getElementById("loading");
+    const responseDiv = document.getElementById("response");
+
+    submitButton.addEventListener("click", function() {
+        // Matikan input dan tombol
+        urlInput.disabled = true;
+        submitButton.disabled = true;
+
+        // Tampilkan loading
+        loadingDiv.style.display = "block";
+
+        // Buat objek XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:3000/api/tes?url=" + encodeURIComponent(urlInput.value), true);
+
+        xhr.onload = function() {
+            // Sembunyikan loading
+            loadingDiv.style.display = "none";
+
+            if (xhr.status === 200) {
+                // Tampilkan respon
+                var response = JSON.parse(xhr.responseText);
+                responseDiv.style.display = "block";
+                responseDiv.textContent = "Respon dari API: " + response.video[0];
+            } else {
+                responseDiv.textContent = "Terjadi kesalahan dalam permintaan API.";
+            }
+
+            // Aktifkan kembali input dan tombol
+            urlInput.disabled = false;
+            submitButton.disabled = false;
+        };
+
+        xhr.onerror = function() {
+            // Sembunyikan loading dan tampilkan pesan kesalahan
+            loadingDiv.style.display = "none";
+            responseDiv.textContent = "Terjadi kesalahan dalam permintaan API.";
+
+            // Aktifkan kembali input dan tombol
+            urlInput.disabled = false;
+            submitButton.disabled = false;
+        };
+
+        xhr.send();
+    });
+});
+
+</script>
+</body>
+</html>

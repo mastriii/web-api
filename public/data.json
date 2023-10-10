@@ -1,0 +1,25 @@
+[{
+	"title" : "Tiktok Download",
+	"desc" : "Download video TikTok tanpa watermark dan watermark",
+	"type" : "json",
+	"key" : "download",
+	"action" : "tiktok",
+	"param" : "url",
+	"status" : "aktif"
+},{
+	"title" : "Instagram Download",
+	"desc" : "Download video Instagram",
+	"type" : "json",
+	"key" : "download",
+	"action" : "instagram",
+	"param" : "url",
+	"status" : "aktif"
+},{
+	"title" : "Facebook Download",
+	"desc" : "Download video Facebook",
+	"type" : "json",
+	"key" : "download",
+	"action" : "facebook",
+	"param" : "url",
+	"status" : "aktif"
+}]
